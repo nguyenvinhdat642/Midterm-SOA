@@ -7,7 +7,8 @@ const session = require('express-session');
 const flash = require('express-flash');
 require('dotenv').config();
 const router = express.Router();
-const indexController = require('./controllers/indexController');
+
+const indexController = require('./src/controllers/indexController');
 
 const app = express();
 
