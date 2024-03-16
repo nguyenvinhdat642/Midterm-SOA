@@ -85,7 +85,7 @@ router.post('/register', async (req, res) => {
     }
 
     console.log('Đã nhận yêu cầu POST đăng ký:', req.body);
-    const { email, password, confirm_password } = req.body;
+    const { email, password, confirm_password } = req.body; 
 
     try {
         const existingUser = await User.findByEmail(email);
