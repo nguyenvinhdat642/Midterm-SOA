@@ -21,7 +21,7 @@ class User {
     static async findByEmail(email) {
         console.log('Đã nhận yêu cầu tìm user theo email:', email);
         return new Promise((resolve, reject) => {
-            connection.query('SELECT * FROM Users WHERE email = ?', [email], (err, results) => {
+            connection.query('SELECT * FROM users WHERE email = ?', [email], (err, results) => {
                 if (err) reject(err);
                 resolve(results[0]);
             });
@@ -32,7 +32,7 @@ class User {
         const hashedPassword = await bcrypt.hash(password, 10);
         const role = 'user';
         return new Promise((resolve, reject) => {
-            connection.query('INSERT INTO Users (email, password, role) VALUES (?, ?, ?)', [email, hashedPassword, role], (err, results) => {
+            connection.query('INSERT INTO users (email, password, role) VALUES (?, ?, ?)', [email, hashedPassword, role], (err, results) => {
                 if (err) reject(err);
                 resolve(results);
             });
@@ -45,7 +45,7 @@ class User {
 
     static async findById(userID) {
         return new Promise((resolve, reject) => {
-            connection.query('SELECT * FROM Users WHERE userID = ?', [userID], (err, results) => {
+            connection.query('SELECT * FROM users WHERE userID = ?', [userID], (err, results) => {
                 if (err) reject(err);
                 resolve(results[0]);
             });

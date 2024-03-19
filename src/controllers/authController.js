@@ -7,9 +7,9 @@ const { google } = require('googleapis');
 const OAuth2Client = google.auth.OAuth2;
 const router = express.Router();
 
-const GOOGLE_MAILER_CLIENT_ID = '495540254897-7m09965sumcm5dg4bksoruihagucri0u.apps.googleusercontent.com';
-const GOOGLE_MAILER_CLIENT_SECRET = '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';
-const GOOGLE_MAILER_REFRESH_TOKEN = '1//04LM98RSZhuPHCgYIARAAGAQSNwF-L9Ir6cSpTriQsFc7xmTkjf8uVsJnuR5HLXqgxeyLAgOFQYiksYpa1HjMJtPv9Pp622_xCRc';
+const GOOGLE_MAILER_CLIENT_ID = '1088305001628-4bb04pdrhui0egq95ib53tshp4j4u18t.apps.googleusercontent.com';
+const GOOGLE_MAILER_CLIENT_SECRET = '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';
+const GOOGLE_MAILER_REFRESH_TOKEN = '1//04NeYBAwhbUGiCgYIARAAGAQSNwF-L9Irjc6RCsK_DCeLjsVBsEq3Xtmv-RtkT10e8HzNw-rAYrQKLqCzQUORUrj7_Is8h_7YsQU';
 const ADMIN_EMAIL_ADDRESS = 'vinhdatgg09@gmail.com';
 
 const myOAuth2Client = new OAuth2Client(GOOGLE_MAILER_CLIENT_ID, GOOGLE_MAILER_CLIENT_SECRET);
@@ -30,13 +30,14 @@ const transporter = nodemailer.createTransport({
 });
 
 const checkLoginMiddleware = (req, res, next) => {
-    if (req.session.user) {
+    if (req.session && req.session.user) {
         res.locals.user = req.session.user;
     } else {
         res.locals.user = null;
     }
     next();
 };
+
 
 router.use(checkLoginMiddleware);
 
@@ -78,8 +79,8 @@ router.post('/login', async (req, res) => {
     }
 });
 
+
 router.post('/register', async (req, res) => {
-    // Redirect to home if the user is already logged in
     if (req.session.user) {
         return res.redirect('/');
     }

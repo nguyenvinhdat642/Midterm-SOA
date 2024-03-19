@@ -16,7 +16,10 @@
     "express": "^4.18.3",
     "express-flash": "^0.0.2",
     "express-session": "^1.18.0",
+    "googleapis": "^134.0.0",
     "mysql2": "^3.9.2",
+    "nodemailer": "^6.9.12",
+    "otp-generator": "^4.0.1",
     "path": "^0.12.7"
   },
   "devDependencies": {

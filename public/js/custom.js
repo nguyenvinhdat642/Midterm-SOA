@@ -44,3 +44,55 @@ $('.team_carousel').owlCarousel({
         }
     }
 })
+
+// login and logout
+function toggleLogin() {
+    $.ajax({
+        url: '/check-login',
+        method: 'GET',
+        success: function (data) {
+            if (data.loggedIn) {
+                handleLogout();
+            } else {
+                window.location.href = '/login';
+            }
+        },
+        error: function () {
+            console.error('Error checking login status');
+        }
+    });
+}
+
+function handleLogout() {
+    $.ajax({
+        url: '/logout',
+        method: 'POST',
+        success: function (data) {
+            if (data.success) {
+                location.reload();
+            }
+        },
+        error: function () {
+            console.error('Error logging out');
+        }
+    });
+}
+
+$(document).ready(function () {
+    $.ajax({
+        url: '/check-login',
+        method: 'GET',
+        success: function (data) {
+            if (data.loggedIn) {
+                $('#user-email').html(data.userEmail);
+                $('#login-logout-text').html('Logout');
+            } else {
+                $('#user-email').html('');
+                $('#login-logout-text').html('Login');
+            }
+        },
+        error: function () {
+            console.error('Error checking login status');
+        }
+    });
+});
